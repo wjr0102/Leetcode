@@ -1,11 +1,3 @@
-#!/usr/local/bin
-# -*- coding: utf-8 -*-
-# @Author: Jingrou Wu
-# @Date:   2019-03-29 22:01:08
-# @Last Modified by:   Jingrou Wu
-# @Last Modified time: 2019-03-29 22:10:07
-
-
 class LRUCache(object):
 
     def __init__(self, capacity):
@@ -21,9 +13,11 @@ class LRUCache(object):
         :type key: int
         :rtype: int
         """
+        # print("Get %d"%key)
         if self.cache.__contains__(key):
             self.stack.remove(key)
             self.stack.append(key)
+            # print(self.stack)
             return self.cache[key]
         else:
             return -1
@@ -34,9 +28,22 @@ class LRUCache(object):
         :type value: int
         :rtype: None
         """
+        # print("Put %d"%key)
         if (len(self.cache) == self.capacity) and (not self.cache.__contains__(key)):
             delete_key = self.stack.pop(0)
             del(self.cache[delete_key])
 
         self.cache[key] = value
-        self.stack = self.cache.keys()
+        if key not in self.stack:
+            self.stack.append(key)
+        else:
+            self.stack.remove(key)
+            self.stack.append(key)
+        # print(self.stack)
+        
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
