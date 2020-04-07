@@ -3,8 +3,40 @@
 # @Author: Jingrou Wu
 # @Date:   2018-12-17 19:47:45
 # @Last Modified by:   Jingrou Wu
-# @Last Modified time: 2018-12-21 14:22:36
+# @Last Modified time: 2020-04-07 10:15:00
 import numpy as np
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        n = len(matrix)
+        i = 0
+        # Total n%2 layer
+        while i <= n//2-1:
+            # Move n-2*i items
+            j = 0
+            x = i
+            while j<n-2*i-1:
+                # Move 4 items
+                y = j+i
+                num = matrix[x][y]
+                for k in range(4):
+                    # print(i,j,k)
+                    # print("Origin: (%d,%d)\r num: %d"%(x,y,num))
+                    py = n - x - 1
+                    px = y
+                    temp = matrix[px][py]
+                    matrix[px][py] = num
+                    num = temp
+                    x = px
+                    y = py
+                    # print("After: (%d,%d)\r num: %d"%(x,y,num))
+                    # print(matrix)
+                j += 1
+            i += 1
+
 
 
 def rotate(matrix):
