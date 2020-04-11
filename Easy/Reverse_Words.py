@@ -1,41 +1,27 @@
-#!/usr/local/bin
-# -*- coding: utf-8 -*-
-# @Author: Jingrou Wu
-# @Date:   2019-03-29 18:13:31
-# @Last Modified by:   Jingrou Wu
-# @Last Modified time: 2019-03-29 18:21:22
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        # Remove Whitespace
+        s = s.strip()
+        words = []
+        word = ""
+        for c in s:
+            if c==" " and word!="":
+                words.append(word)
+                word = ""
+            elif c!=" ":
+                word += c
+        words.append(word)
+        ans = ""
+        for word in words[::-1]:
+            ans += word + " "
+        return str(ans[:-1])
 
-
-def reverseWords(s):
-    """
-    :type s: str
-    :rtype: str
-    """
-    s += " "
-    result = ""
-    word = []
-    for c in s:
-        if c != ' ':
-            word.append(c)
-        else:
-            result += reverseString(word)
-            result += " "
-            word = []
-
-    return result[:-1]
-
-
-def reverseString(word):
-    head = 0
-    tail = len(word) - 1
-    while head < tail:
-        word[head], word[tail] = word[tail], word[head]
-        head += 1
-        tail -= 1
-
-    return ''.join(word)
-
-
-if __name__ == "__main__":
-    s = "Let's take LeetCode contest"
-    print(reverseWords(s))
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        s = s.strip()
+        words = s.split(" ")
+        ans = ""
+        for i in range(len(words)-1,-1,-1):
+            if words[i]:
+                ans += words[i] + " "
+        return ans[:-1]
