@@ -72,6 +72,44 @@ def threeSum3(nums):
                         results.append(result)
         return results
 
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        dic = {}
+        flags ={}
+        for x in nums:
+            if dic.__contains__(x):
+                dic[x] += 1
+            else:
+                dic[x] = 1
+                flags[x] = set()
+        res = []
+        for i in range(len(nums)):
+            a = nums[i]
+            for j in range(i+1,len(nums)):
+                if nums[j] in flags[a]:
+                    continue
+                b = nums[j]
+                x = -a-b
+                if x in dic and x not in flags[a]:
+                    if x!=a and x!=b:
+                        flags[a].add(b)
+                        flags[a].add(x)
+                        flags[b].add(a)
+                        flags[b].add(x)
+                        flags[x].add(a)
+                        flags[x].add(b)
+                        res.append([a,b,x])
+                    else:
+                        if (a==b and dic[x]>=3) or (a!=b and dic[x]>=2):
+                            flags[a].add(b)
+                            flags[a].add(x)
+                            flags[b].add(a)
+                            flags[b].add(x)
+                            flags[x].add(a)
+                            flags[x].add(b)
+                            res.append([a,b,x])
+        return list(res)
+
 
 if __name__ == "__main__":
     begin = time.time()
