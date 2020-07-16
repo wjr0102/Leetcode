@@ -1,11 +1,18 @@
+'''
+    785. 判断二分图
+'''
 class Solution:
     def isBipartite(self, graph) -> bool:
+        """
+            染色法+DFS
+        """
         blue = set()
         red = set()
         flags = set()
         n = len(graph)
         total = set([i for i in range(n)])
         while len(flags)!=n:
+            # 处理不连通图
             diff = total - flags
             queue = [diff.pop()]
             print(flags,diff,queue)
